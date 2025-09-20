@@ -54,14 +54,15 @@ def test_index_help():
     runner = CliRunner()
     result = runner.invoke(cli, [cmd_str, "--help"], prog_name=cli_name)
     assert result.exit_code == 0
-    assert result.output.startswith(f"Usage: {cli_name} {cmd_str} [OPTIONS] OUT_FILENAME")
+    assert result.output.startswith(f"Usage: {cli_name} {cmd_str} [OPTIONS] REMOTE OUT_FILENAME")
 
 
 def test_index_run(tmp_path):
     cmd_str = "index"
     runner = CliRunner()
+    remote = "openneuro"
     out_fname = tmp_path / "openneuro_datasets.tsv"
-    result = runner.invoke(cli, [cmd_str, str(out_fname)], prog_name=cli_name)
+    result = runner.invoke(cli, [cmd_str, remote, str(out_fname)], prog_name=cli_name)
     assert result.exit_code == 0
     assert out_fname.is_file()
 
