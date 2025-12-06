@@ -33,7 +33,8 @@ TASKS = "tasks"
 # Attributes used to filter datasets
 DIRECTORY = "directory"
 
-# Attributes used to store locally records with details about datasets (select and characterize for now)
+# Attributes used to store locally records with details about datasets (select
+# and characterize for now)
 DATASETID = "datasetid"
 FILENAME = "filename"
 FULLPATH = "fullpath"
