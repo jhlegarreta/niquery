@@ -110,7 +110,8 @@ def fetch_page(gql_url: str, after_cursor: str | None = None) -> dict:
 
 
 def get_cursors(remote: str) -> list:
-    """Serially walk through the entire dataset list from the given remote to collect all pagination cursors.
+    """Serially walk through the entire dataset list from the given remote to
+    collect all pagination cursors.
 
     This function starts from the beginning and keeps fetching pages until the
     last one, recording the 'endCursor' of each page to enable parallel fetching
