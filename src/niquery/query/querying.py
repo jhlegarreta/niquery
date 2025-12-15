@@ -37,6 +37,7 @@ from niquery.utils.attributes import (
     FILENAME,
     FULLPATH,
     ID,
+    KEY,
     MODALITIES,
     NAME,
     REMOTE,
@@ -384,7 +385,7 @@ def query_snapshot_tree(
         current_path = f"{parent_path}/{f[FILENAME]}".lstrip("/")
         if f[DIRECTORY]:
             sub_files = query_snapshot_tree(
-                gql_url, dataset_id, snapshot_tag, f[ID], parent_path=current_path
+                gql_url, dataset_id, snapshot_tag, f[KEY], parent_path=current_path
             )
             all_files.extend(sub_files)
         else:
