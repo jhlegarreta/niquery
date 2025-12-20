@@ -216,7 +216,7 @@ def filter_on_timepoint_count(
     timepoints.
 
     Filters BOLD runs whose timepoint count is not within the range
-    `[min_timepoints, max_timepoints]`.
+    ``[min_timepoints, max_timepoints]``.
 
     Parameters
     ----------
