@@ -3,8 +3,8 @@ niquery.analysis package
 
 .. automodule:: niquery.analysis
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------

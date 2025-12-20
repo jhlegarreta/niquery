@@ -3,5 +3,5 @@ niquery.utils.logging module
 
 .. automodule:: niquery.utils.logging
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
