@@ -241,7 +241,7 @@ def post_with_retry(
     """Post an HTTP request with retrying.
 
     If the request is unsuccessful, retry ``retries`` times after an exponential
-    wait time computed as :math:`backoff^attempt`.
+    wait time computed as :math:`backoff^{attempt}`.
 
     Parameters
     ----------
