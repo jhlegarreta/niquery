@@ -13,11 +13,10 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Science/Research",
   "Topic :: Scientific/Engineering :: Image Recognition",
-  "License :: OSI Approved :: Apache Software License",
   "Programming Language :: Python",
 ]
 license = "Apache-2.0"
-license-files = ["LICEN[CS]E.*"]
+license-files = ["LICEN[CS]E*"]
 requires-python = ">=3.10"
 dependencies = [
   "boto3",
