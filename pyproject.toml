@@ -180,13 +180,6 @@ omit = [
   "src/niquery/_version.py"
 ]
 
-[tool.coverage.report]
-# Regexes for lines to exclude from consideration
-exclude_lines = [
-  "raise NotImplementedError",
-  "warnings\\.warn",
-]
-
 [tool.codespell]
 # word - explanation
 ignore-words-list = " "
