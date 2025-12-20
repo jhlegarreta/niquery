@@ -176,9 +176,7 @@ branch = true
 parallel = true
 concurrency = ["multiprocessing"]
 omit = [
-  "*/tests/*",
-  "*/testing/*",
-  "*/__init__.py",
+  "^test/*",
   "*/conftest.py",
   "src/niquery/_version.py"
 ]
