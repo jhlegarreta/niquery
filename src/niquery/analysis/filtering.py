@@ -30,11 +30,19 @@ import pandas as pd
 from tqdm import tqdm
 
 from niquery.utils.attributes import (
+    ANNEXED,
     DATASETID,
+    DIRECTORY,
     FILENAME,
+    FULLPATH,
+    ID,
+    KEY,
     MODALITIES,
     REMOTE,
+    SIZE,
     SPECIES,
+    TAG,
+    URLS,
     VOLS,
 )
 
@@ -157,7 +165,20 @@ def filter_modality_records(fname: str, sep: str, suffix: str | list) -> pd.Data
         suffix = [suffix]
 
     pattern = "(" + "|".join([s + ".nii.gz" for s in suffix]) + ")"
-    df = pd.read_csv(fname, sep=sep)
+    dtype_dict = {
+        REMOTE: str,
+        DATASETID: str,
+        TAG: str,
+        ID: str,
+        FILENAME: str,
+        SIZE: int,
+        DIRECTORY: bool,
+        ANNEXED: bool,
+        KEY: str,
+        URLS: str,
+        FULLPATH: str,
+    }
+    df = pd.read_csv(fname, sep=sep, converters=dtype_dict)
     return df[df[FILENAME].apply(lambda fn: bool(re.search(pattern, fn)))]
 
 
