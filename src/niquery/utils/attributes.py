@@ -35,8 +35,11 @@ TASKS = "tasks"
 DIRECTORY = "directory"
 
 # Attributes used to store locally records with details about datasets
+ANNEXED = "annexed"
 DATASETID = "datasetid"
 FILENAME = "filename"
 FULLPATH = "fullpath"
 REMOTE = "remote"
+SIZE = "size"
+URLS = "urls"
 VOLS = "vols"
