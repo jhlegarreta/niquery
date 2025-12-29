@@ -1,3 +1,9 @@
+25.0.0rc2 (December 28, 2025)
+=============================
+
+  * ENH: Read multi-line columns when filtering modality records (#28)
+
+
 25.0.0rc1 (December 21, 2025)
 =============================
 
