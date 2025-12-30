@@ -3,5 +3,5 @@ niquery.data.remotes module
 
 .. automodule:: niquery.data.remotes
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

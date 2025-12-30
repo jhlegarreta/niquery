@@ -3,8 +3,8 @@ niquery.query package
 
 .. automodule:: niquery.query
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------

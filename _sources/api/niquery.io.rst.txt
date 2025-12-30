@@ -3,8 +3,8 @@ niquery.io package
 
 .. automodule:: niquery.io
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------

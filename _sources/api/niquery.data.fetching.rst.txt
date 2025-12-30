@@ -3,5 +3,5 @@ niquery.data.fetching module
 
 .. automodule:: niquery.data.fetching
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
