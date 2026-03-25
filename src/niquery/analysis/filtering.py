@@ -95,9 +95,11 @@ def filter_modality_datasets(df: pd.DataFrame, modality: str | list) -> pd.Serie
         modality = [modality]
 
     return df[MODALITIES].apply(
-        lambda x: any(item.lower() in modality for item in ast.literal_eval(x))
-        if isinstance(x, str) and x.startswith("[")
-        else False
+        lambda x: (
+            any(item.lower() in modality for item in ast.literal_eval(x))
+            if isinstance(x, str) and x.startswith("[")
+            else False
+        )
     )
 
 
