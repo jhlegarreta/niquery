@@ -45,14 +45,14 @@ jobs:
           echo SHA=$SHA >> $GITHUB_OUTPUT
           echo SHA7=${SHA:0:7} >> $GITHUB_OUTPUT
       - name: Check for data-v2-${{ steps.test-head.outputs.SHA }}
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         id: test-data
         with:
           path: ${{ env.TEST_DATA_HOME }}
           key: data-v2-${{ steps.test-head.outputs.SHA }}
           lookup-only: true
       - name: Create data-v2-${{ steps.test-head.outputs.SHA }}
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         if: steps.test-data.outputs.cache-hit != 'true'
         with:
           path: ${{ env.TEST_DATA_HOME }}
@@ -62,7 +62,7 @@ jobs:
             data-v1
             data-v0
 #      - name: Install the latest version of uv
-#        uses: astral-sh/setup-uv@v5
+#        uses: astral-sh/setup-uv@v7
 #        if: steps.test-data.outputs.cache-hit != 'true'
 #      - name: Install datalad
 #        if: steps.test-data.outputs.cache-hit != 'true'
@@ -88,7 +88,7 @@ jobs:
       - name: Clone the GIN repository
         if: steps.test-data.outputs.cache-hit != 'true'
         run: |
-          # actions/cache@v4 creates the cache directory, so remove it
+          # actions/cache@v5 creates the cache directory, so remove it
           # to avoid an error when cloning
           rm -rf $TEST_DATA_HOME
           git clone $TEST_DATA_REPO $TEST_DATA_HOME
@@ -101,7 +101,7 @@ jobs:
       matrix:
         python-version: ${{ github.event_name == 'schedule' && fromJson('["3.10", "3.11", "3.12", "3.13"]') || fromJson('["3.12"]') }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           submodules: recursive
           fetch-depth: 0
@@ -111,13 +111,13 @@ jobs:
           git config --global user.name 'NiPreps Bot'
           git config --global user.email 'nipreps@gmail.com'
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
       - name: Restore test data cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ env.TEST_DATA_HOME }}
           key: data-v2-${{ needs.cache-test-data.outputs.SHA }}
@@ -133,7 +133,7 @@ jobs:
         run: tox c
       - name: Run tox
         run: tox -v --exit-and-dump-after 1200
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@v6
         if: ${{ always() }}
         with:
           files: cov.xml
@@ -146,12 +146,12 @@ jobs:
       matrix:
         check: ['spellcheck', 'typecheck']
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v7
       # Can remove this once there is a traits release that supports 3.13
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.12
       - name: Install tox
