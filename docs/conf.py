@@ -246,6 +246,27 @@ import inspect
 def autodoc_process_signature(app, what, name, obj, options, signature, return_annotation):
     """Replace the class signature by the signature from cls.__init__"""
 
+    # Make TypeVar rendering robust (and keep it documented)
+    # Sphinx autodoc may try to "format signature" for TypeVar and crash.
+    # If obj is a TypeVar instance, provide a simple, stable signature.
+    try:
+        if type(obj) is typing.TypeVar:
+            # Example: "F" or "_F"
+            tv_name = getattr(obj, "__name__", name.rsplit(".", 1)[-1])
+            # Best-effort to show bounds/constraints without triggering internal errors
+            bound = getattr(obj, "__bound__", None)
+            constraints = getattr(obj, "__constraints__", ())
+            if constraints:
+                rhs = " | ".join(getattr(c, "__name__", repr(c)) for c in constraints)
+            elif bound is not None:
+                rhs = getattr(bound, "__name__", repr(bound))
+            else:
+                rhs = "Any"
+            return f" = TypeVar({tv_name!r}, bound={rhs})", return_annotation
+    except Exception:
+        # If anything goes wrong, fall back to Sphinx defaults
+        return signature, return_annotation
+
     if what == "class" and hasattr(obj, "__init__"):
         try:
             init_signature = inspect.signature(obj.__init__)
