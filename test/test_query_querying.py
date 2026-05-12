@@ -47,7 +47,6 @@ from niquery.utils.attributes import (
     FILENAME,
     FULLPATH,
     ID,
-    KEY,
     MODALITIES,
     NAME,
     REMOTE,
@@ -291,12 +290,12 @@ def test_query_snapshot_files_ok(monkeypatch):
 def test_query_snapshot_tree_recurses(monkeypatch):
     # First call returns a directory and a file
     root_files = [
-        {KEY: "dir1", FILENAME: "sub", DIRECTORY: True},
-        {KEY: "f1", FILENAME: "rootfile.txt", DIRECTORY: False},
+        {ID: "dir1", FILENAME: "sub", DIRECTORY: True},
+        {ID: "f1", FILENAME: "rootfile.txt", DIRECTORY: False},
     ]
     # Second call returns a file within the directory
     sub_files = [
-        {KEY: "f2", FILENAME: "subfile.txt", DIRECTORY: False},
+        {ID: "f2", FILENAME: "subfile.txt", DIRECTORY: False},
     ]
     calls = []
 
@@ -314,6 +313,10 @@ def test_query_snapshot_tree_recurses(monkeypatch):
     fullpaths = sorted(f[FULLPATH] for f in out)
     assert fullpaths == ["rootfile.txt", "sub/subfile.txt"]
     assert calls == ["root", "dir1"]
+    assert out == [
+        {ID: "f2", FILENAME: "subfile.txt", DIRECTORY: False, FULLPATH: "sub/subfile.txt"},
+        {ID: "f1", FILENAME: "rootfile.txt", DIRECTORY: False, FULLPATH: "rootfile.txt"},
+    ]
 
 
 def test_query_snapshot_tree_handles_exception(monkeypatch, caplog):

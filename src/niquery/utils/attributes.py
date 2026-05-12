@@ -24,7 +24,6 @@
 # Attributes returned by GraphQL when querying OpenNeuro
 DATASET_DOI = "DatasetDOI"
 ID = "id"
-KEY = "key"
 MODALITIES = "modalities"
 NAME = "name"
 SPECIES = "species"
