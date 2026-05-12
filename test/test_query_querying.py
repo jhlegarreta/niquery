@@ -248,6 +248,55 @@ def test_post_with_retry_other_exceptions(monkeypatch, exc_factory, caplog):
     assert any("for http://example" in rec.message for rec in caplog.records)
 
 
+def test_query_snapshot_files_posts_expected_gql_contract(monkeypatch):
+    captured = {}
+
+    def mock_post_with_retry(url, headers, payload, retries=5, backoff=1.5):
+        captured["url"] = url
+        captured["headers"] = headers
+        captured["payload"] = payload
+        return DummyResponse(
+            200,
+            {
+                "data": {
+                    "snapshot": {
+                        "files": [{"id": "f1", "filename": "a.nii.gz", "directory": False}]
+                    }
+                }
+            },
+        )
+
+    monkeypatch.setattr("niquery.query.querying.post_with_retry", mock_post_with_retry)
+
+    files = query_snapshot_files(
+        "https://openneuro.org/crn/graphql",
+        "ds000001",
+        "1.0.0",
+        tree="tree-node-id",
+    )
+
+    assert files == [{"id": "f1", "filename": "a.nii.gz", "directory": False}]
+
+    payload = captured["payload"]
+    query = " ".join(payload["query"].split())
+    variables = payload["variables"]
+
+    assert query.startswith("query getSnapshotFiles(")
+    assert "snapshot(datasetId: $datasetId, tag: $tag)" in query
+    assert "files(tree: $tree)" in query
+
+    for token in ("$datasetId:", "$tag:", "$tree:"):
+        assert token in query
+
+    for field in ("id", "filename", "size", "directory", "annexed", "urls"):
+        assert f" {field} " in f" {query} "
+
+    assert set(variables) == {"datasetId", "tag", "tree"}
+    assert variables["datasetId"] == "ds000001"
+    assert variables["tag"] == "1.0.0"
+    assert variables["tree"] == "tree-node-id"
+
+
 def test_query_snapshot_files_response_none(monkeypatch, caplog):
     def mock_post_with_retry(gql_url, headers, payload):
         return None
