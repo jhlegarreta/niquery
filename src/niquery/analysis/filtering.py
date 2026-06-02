@@ -36,7 +36,6 @@ from niquery.utils.attributes import (
     FILENAME,
     FULLPATH,
     ID,
-    KEY,
     MODALITIES,
     REMOTE,
     SIZE,
@@ -176,7 +175,6 @@ def filter_modality_records(fname: str, sep: str, suffix: str | list) -> pd.Data
         SIZE: int,
         DIRECTORY: bool,
         ANNEXED: bool,
-        KEY: str,
         URLS: str,
         FULLPATH: str,
     }
