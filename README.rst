@@ -32,6 +32,10 @@ research hypothesis testing.
    :target: https://github.com/nipreps/niquery/actions/workflows/contrib.yml
    :alt: Contribution checks
 
+.. image:: https://codecov.io/gh/nipreps/niquery/branch/main/graph/badge.svg
+   :target: https://app.codecov.io/gh/nipreps/niquery
+   :alt: Code coverage
+
 .. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json
    :target: https://github.com/astral-sh/ruff
    :alt: Code format
