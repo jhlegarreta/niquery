@@ -16,6 +16,10 @@ research hypothesis testing.
    :target: https://pypi.python.org/pypi/niquery/
    :alt: Latest Version
 
+.. image:: https://github.com/nipreps/niquery/actions/workflows/citation.yml/badge.svg
+   :target: https://github.com/nipreps/niquery/actions/workflows/citation.yml
+   :alt: Citation
+
 .. image:: https://github.com/nipreps/niquery/actions/workflows/test.yml/badge.svg
    :target: https://github.com/nipreps/niquery/actions/workflows/test.yml
    :alt: Testing
